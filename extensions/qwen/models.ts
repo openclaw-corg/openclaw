@@ -19,6 +19,8 @@ export const QWEN_OAUTH_BASE_URL = "https://portal.qwen.ai/v1";
 
 export const QWEN_DEFAULT_MODEL_ID = "qwen3.5-plus";
 export const QWEN_36_PLUS_MODEL_ID = "qwen3.6-plus";
+export const QWEN_37_PLUS_MODEL_ID = "qwen3.7-plus";
+export const QWEN_37_MAX_MODEL_ID = "qwen3.7-max";
 export const QWEN_DEFAULT_COST = {
   input: 0,
   output: 0,
@@ -45,6 +47,24 @@ export const QWEN_MODEL_CATALOG: ReadonlyArray<ModelDefinitionConfig> = [
     input: ["text", "image"],
     cost: QWEN_DEFAULT_COST,
     contextWindow: 1_000_000,
+    maxTokens: 65_536,
+  },
+  {
+    id: QWEN_37_PLUS_MODEL_ID,
+    name: QWEN_37_PLUS_MODEL_ID,
+    reasoning: false,
+    input: ["text", "image"],
+    cost: QWEN_DEFAULT_COST,
+    contextWindow: 1_000_000,
+    maxTokens: 65_536,
+  },
+  {
+    id: QWEN_37_MAX_MODEL_ID,
+    name: QWEN_37_MAX_MODEL_ID,
+    reasoning: false,
+    input: ["text"],
+    cost: QWEN_DEFAULT_COST,
+    contextWindow: 262_144,
     maxTokens: 65_536,
   },
   {

@@ -142,6 +142,51 @@ Upgrading? [Updating guide](https://docs.openclaw.ai/install/updating) (and run 
 
 Models config + CLI: [Models](https://docs.openclaw.ai/concepts/models). Auth profile rotation + fallbacks: [Model failover](https://docs.openclaw.ai/concepts/model-failover).
 
+## Development from source
+
+Requirements: **Node 22.19+** (Node 24 recommended), **pnpm 11+**
+
+```bash
+# Setup Node (if using nvm)
+source ~/.nvm/nvm.sh && nvm use 22
+
+# Install dependencies and build
+pnpm install
+pnpm build
+
+# Run onboarding (first-time setup)
+pnpm openclaw onboard
+```
+
+### Running OpenClaw
+
+```bash
+# Interactive mode
+pnpm openclaw
+
+# Start gateway in foreground (debug mode)
+pnpm openclaw gateway --port 18789 --verbose
+
+# Start gateway as background daemon
+pnpm openclaw gateway --install-daemon
+
+# Check gateway status
+pnpm openclaw gateway status
+```
+
+### Stopping OpenClaw
+
+```bash
+# Stop interactive mode
+Ctrl+C  # or type /exit
+
+# Stop gateway daemon
+pnpm openclaw gateway stop
+
+# Uninstall gateway daemon
+pnpm openclaw gateway --uninstall-daemon
+```
+
 ## Security defaults (DM access)
 
 OpenClaw connects to real messaging surfaces. Treat inbound DMs as **untrusted input**.

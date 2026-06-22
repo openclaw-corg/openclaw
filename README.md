@@ -333,6 +333,25 @@ Minimal `~/.openclaw/openclaw.json` (model + defaults):
 
 [Full configuration reference (all keys + examples).](https://docs.openclaw.ai/gateway/configuration)
 
+## Backup & Restore
+
+Backup scripts are provided to save source code and configuration:
+
+```bash
+# Backup (creates timestamped archive in /Users/admin/workspace/OPC/backup/openclaw-bk/)
+./backup.sh
+
+# Restore (interactive - select from available backups)
+./restore.sh
+```
+
+**What's backed up:**
+
+- `.env` configuration file
+- Source code (excludes `node_modules`, `dist`, `.git`)
+
+Backups are automatically rotated (keeps last 5).
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=openclaw/openclaw&type=date&legend=top-left)](https://www.star-history.com/#openclaw/openclaw&type=date&legend=top-left)

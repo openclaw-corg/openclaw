@@ -17,14 +17,29 @@ mkdir -p "$BACKUP_DIR"
 
 # 1. Backup .env file
 if [ -f "$SCRIPT_DIR/.env" ]; then
-    echo "[1/2] Backing up .env..."
+    echo "[1/3] Backing up .env..."
     cp "$SCRIPT_DIR/.env" "$BACKUP_DIR/env.backup"
 else
-    echo "[1/2] WARNING: .env file not found"
+    echo "[1/3] WARNING: .env file not found"
 fi
 
-# 2. Backup source code (exclude node_modules, dist, .git)
-echo "[2/2] Backing up source code..."
+# 2. Backup runtime config (~/.openclaw/)
+RUNTIME_DIR="$HOME/.openclaw"
+if [ -d "$RUNTIME_DIR" ]; then
+    echo "[2/3] Backing up runtime config (~/.openclaw/)..."
+    tar -czf "$BACKUP_DIR/openclaw-runtime.tar.gz" \
+        -C "$HOME" \
+        --exclude=".openclaw/cache" \
+        --exclude=".openclaw/logs" \
+        --exclude=".openclaw/tmp" \
+        --exclude=".openclaw/npm" \
+        .openclaw
+else
+    echo "[2/3] WARNING: ~/.openclaw not found"
+fi
+
+# 3. Backup source code (exclude node_modules, dist, .git)
+echo "[3/3] Backing up source code..."
 tar -czf "$BACKUP_DIR/openclaw-src.tar.gz" \
     -C "$(dirname "$SCRIPT_DIR")" \
     --exclude="openclaw/node_modules" \
